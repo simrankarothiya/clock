@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clock Design</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color:rgb(22, 41, 47);
+            background-repeat: no-repeat;
+            background-size: cover;
+            min-height: 100vh;
+            color: darkgoldenrod;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bolder;
+            font-size: larger;
+            font-family: cursive;
+
+        }
+
+        .container {
+            position: relative;
+        }
+
+        .clock {
+            border-radius: 50%;
+            background-color: rgb(33, 32, 32);
+            width: 330px;
+            height: 330px;
+            border: 2px solid rgb(63, 56, 56);
+            box-shadow: 0 0 8px black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-style: dashed;
+
+
+        }
+
+        .clock span {
+            position: absolute;
+            transform: rotate(calc(30deg*var(--i)));
+            inset: 12px;
+            text-align: center;
+        }
+
+        .clock span b {
+            transform: rotate(calc(-30deg*var(--i)));
+            display: inline-block;
+        }
+
+        .clock::before {
+            content: '';
+            width: 9px;
+            height: 9px;
+            background-color: aliceblue;
+            position: absolute;
+            border-radius: 50%;
+            z-index: 2;
+        }
+
+        .hands {
+            position: absolute;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+        }
+
+        .hands i {
+            position: absolute;
+            display: flex;
+            background-color: var(--color);
+            width: 6px;
+            height: 70px;
+            border-radius: 8px;
+            height: var(--h);
+            width: var(--w);
+        }
+
+        h1 {
+            color: black;
+            margin-bottom: 500px;
+            text-align: center;
+            justify-content: center;
+            padding-top: 80px;
+            position: absolute;
+            font-size: 70px;
+            font-family: 'Unica One', cursive;
+            top:30px;
+        }
+
+        h2 {
+            margin-top: 470px;
+            align-items: flex-end;
+
+            position: absolute;
+            color: rgb(68, 48, 48);
+            font-family: 'Times New Roman', Times, serif;
+            font-size: larger;
+        }
+
+        h3 {
+            margin-top: 530px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            position: absolute;
+            color: rgb(245, 171, 33);
+        }
+        .gif-clock{
+      position: absolute;
+    width: 90px;
+    height: 85px;
+    top: 25%;       /* 👈 thoda upar karne ke liye */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;     /* Neeche rahe hands ke */
+    pointer-events: none;
+    opacity: 0.9;
+    border-radius: 50%;
+    background: transparent;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Analog Clock</h1>
+        <div class="clock">
+        <img src="https://media.tenor.com/y8-mj1OA5gkAAAAx/%E1%83%A1%E1%83%90%E1%83%90%E1%83%97%E1%83%98-clock.webp" class="gif-clock">
+            <div style="--color:rgb(251, 215, 9) ; --h:84px ; --w:3.5px;" id="hours" class="hands"><i></i></div>
+            <div style="--color:rgb(224, 43, 43); --h:70px; --w:3px;" id="min" class="hands"><i></i></div>
+            <div style="--color:white; --h:60px; --w:2px;" id="second" class="hands"><i></i></div>
+            <span style="--i:1;"><b>1</b></span>
+            <span style="--i:2;"><b>2</b></span>
+            <span style="--i:3;"><b>3</b></span>
+            <span style="--i:4;"><b>4</b></span>
+            <span style="--i:5;"><b>5</b></span>
+            <span style="--i:6;"><b>6</b></span>
+            <span style="--i:7;"><b>7</b></span>
+            <span style="--i:8;"><b>8</b></span>
+            <span style="--i:9;"><b>9</b></span>
+            <span style="--i:10;"><b>10</b></span>
+            <span style="--i:11;"><b>11</b></span>
+            <span style="--i:12;"><b>12</b></span>
+
+        </div>
+    </div>
+    <h2>Made by :</h2>
+    <h3>"Simran Karothiya"</h3>
+    <script>
+        let hr = document.getElementById('hours');
+        let min = document.getElementById('min');
+        let sec = document.getElementById('second');
+
+        function displayTime() {
+            let date = new Date();
+
+            let hh = date.getHours();
+            let mm = date.getMinutes();
+            let ss = date.getSeconds();
+
+            let hRotation = 30 * hh + mm / 2;
+            let mRotation = 6 * mm;
+            let sRotation = 6 * ss;
+
+            hr.style.transform = `rotate(${hRotation}deg)`;
+            min.style.transform = `rotate(${mRotation}deg)`;
+            sec.style.transform = `rotate(${sRotation}deg)`;
+        }
+        setInterval(displayTime, 1000);
+
+
+    </script>
+
+</body>
+
+</html>
